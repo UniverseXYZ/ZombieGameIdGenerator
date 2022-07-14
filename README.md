@@ -1,6 +1,6 @@
 # ZombieGameIdGenerator
 
-# Set Up
+## Set Up
 1. Run `npm install` inside of the repository.
 2. Create a `.env` file inside of the repository.
 4. Make sure you have `node` installed on your computer. 
