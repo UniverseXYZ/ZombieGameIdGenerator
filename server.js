@@ -25,11 +25,14 @@ app.get('/getId', async (req, res) => {
   try {
     const { account } = req.query;
     const query = polyMorphQueries.getPolyMorphsQuery;
-    const { transferEntities } = await request(process.env.THE_GRAPH_URL, query, {
+    const polyMorphsV1 = await request(process.env.THE_GRAPH_URL, query, {
+      walletAddress: account
+    });
+    const polyMorphsV2 = await request(process.env.THE_GRAPH_V2_URL, query, {
       walletAddress: account
     });
 
-    if (transferEntities.length > 0) {
+    if (polyMorphsV1.transferEntities.length > 0 || polyMorphsV2.transferEntities.length > 0) {
       const user = await mongooseService.updateUser(account);
       res.json({
         id: user.id,
